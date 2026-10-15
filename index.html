@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#171329">
+<title>مدیریت فروشگاه آرایشی</title>
+<style>
+:root{--bg:#f5f4fa;--card:#fff;--ink:#211d35;--muted:#77738b;--line:#e9e6f1;--purple:#6d4aff;--purple2:#8b5cf6;--green:#168765;--red:#d9475c;--gold:#c27a16;--shadow:0 8px 28px #2920440d}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Tahoma,"Segoe UI",sans-serif;font-size:14px}button,input,select{font:inherit}button{cursor:pointer;border:0;border-radius:11px;padding:10px 14px;background:var(--purple);color:white;font-weight:700}button.secondary{background:#f0edff;color:#5034c7}button.danger{background:#fff0f2;color:#c52e48}button.ghost{background:transparent;color:var(--muted);border:1px solid var(--line)}header{background:linear-gradient(120deg,#171329,#30205c);color:white;padding:22px max(18px,calc((100% - 1200px)/2));display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}header h1{margin:0 0 7px;font-size:22px}header p{margin:0;color:#d8d0f4;font-size:12px}.wrap{max-width:1200px;margin:auto;padding:18px}.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}.tabs{display:flex;gap:7px;overflow:auto;margin:0 0 16px;padding-bottom:3px}.tabs button{white-space:nowrap;background:#eae7f5;color:#635d79}.tabs button.active{background:var(--purple);color:white}.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:16px}.stat,.panel{background:var(--card);border:1px solid var(--line);border-radius:17px;padding:17px;box-shadow:var(--shadow)}.stat small{color:var(--muted)}.stat strong{display:block;font-size:22px;margin:10px 0 5px;overflow-wrap:anywhere}.stat span{font-size:11px;color:var(--muted)}.panel h2{font-size:16px;margin:0 0 15px}.grid{display:grid;grid-template-columns:1.2fr .8fr;gap:14px}.row{display:flex;gap:9px;flex-wrap:wrap;align-items:end}.field{display:flex;flex-direction:column;gap:6px;flex:1;min-width:130px;margin-bottom:11px}.field label{font-size:12px;color:var(--muted)}input,select{width:100%;padding:11px;border:1px solid #ded9eb;border-radius:10px;background:#fff;color:var(--ink);outline:none}input:focus,select:focus{border-color:var(--purple);box-shadow:0 0 0 3px #6d4aff16}.tablewrap{overflow:auto}table{border-collapse:collapse;width:100%;min-width:620px}th,td{text-align:right;padding:12px 10px;border-bottom:1px solid var(--line);white-space:nowrap}th{font-size:12px;color:var(--muted);background:#faf9fd}td{font-size:13px}.badge{display:inline-block;border-radius:30px;padding:5px 8px;font-size:11px;background:#e9f8f1;color:#137754}.badge.low{background:#fff0d8;color:#9b5c00}.muted{color:var(--muted)}.empty{text-align:center;padding:30px;color:var(--muted)}.hidden{display:none!important}.notice{background:#fff7e8;border:1px solid #f4dfb5;color:#87560b;padding:12px;border-radius:12px;margin-bottom:14px}.chart{height:180px;display:flex;align-items:end;gap:10px;padding:15px 4px 0;border-bottom:1px solid var(--line)}.barcol{height:100%;flex:1;display:flex;flex-direction:column;justify-content:end;align-items:center;gap:6px;min-width:0}.bar{width:min(36px,80%);min-height:3px;background:linear-gradient(#9c86ff,#6241ed);border-radius:7px 7px 2px 2px}.barcol small{font-size:10px;color:var(--muted)}.barcol em{font-size:10px;font-style:normal;color:var(--muted)}.actions{display:flex;gap:5px}.actions button{padding:6px 8px;font-size:11px}.cartline{display:grid;grid-template-columns:1fr 70px 95px 32px;gap:7px;align-items:center;margin-bottom:8px}.cartline select,.cartline input{padding:8px;min-width:0}.total{background:#f6f3ff;border-radius:12px;padding:13px;margin:14px 0;display:flex;justify-content:space-between;gap:10px;font-weight:bold}.footer{text-align:center;padding:22px;color:#8b879d;font-size:11px}.search{max-width:320px}.pill{display:inline-block;background:#f0edff;color:#5d43c7;border-radius:30px;padding:5px 9px;font-size:11px}
+@media(max-width:760px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.grid{grid-template-columns:1fr}.wrap{padding:12px}.stat{padding:13px}.stat strong{font-size:18px}header{padding:18px}.cartline{grid-template-columns:1fr 58px 80px 28px}.toolbar button{flex:1}}
+@media print{header,.tabs,.toolbar,.no-print,.footer{display:none!important}body{background:white}.wrap{max-width:none;padding:0}.panel,.stat{box-shadow:none;border:0}#invoicePrint{display:block!important}}
+</style>
+</head>
+<body>
+<header><div><h1>✦ مدیریت فروشگاه آرایشی</h1><p>مدیریت کالا، انبار، فروش و سود — تومان</p></div><div class="pill" style="background:#ffffff20;color:#fff">نسخه آزمایشی آفلاین</div></header>
+<div class="wrap">
+<div class="toolbar no-print">
+<button onclick="showTab('sale')">＋ ثبت فروش</button><button class="secondary" onclick="showTab('products')">＋ افزودن کالا</button>
+<button class="ghost" onclick="exportData()">خروجی پشتیبان</button><button class="ghost" onclick="document.getElementById('importFile').click()">بازیابی پشتیبان</button><input id="importFile" type="file" accept=".json,application/json" class="hidden" onchange="importData(event)">
+</div>
+<div class="stats">
+<div class="stat"><small>فروش امروز</small><strong id="todaySales">۰ تومان</strong><span id="todayCount">۰ فاکتور</span></div>
+<div class="stat"><small>سود ناخالص امروز</small><strong id="todayProfit">۰ تومان</strong><span>بر اساس قیمت خرید ثبت‌شده</span></div>
+<div class="stat"><small>ارزش موجودی انبار</small><strong id="stockValue">۰ تومان</strong><span>با قیمت خرید</span></div>
+<div class="stat"><small>تعداد کالاها</small><strong id="productCount">۰</strong><span id="lowCount">۰ کالا با موجودی کم</span></div>
+</div>
+<div class="tabs no-print">
+<button class="active" data-tab="dashboard" onclick="showTab('dashboard')">داشبورد</button>
+<button data-tab="products" onclick="showTab('products')">کالاها و انبار</button>
+<button data-tab="sale" onclick="showTab('sale')">ثبت فروش</button>
+<button data-tab="sales" onclick="showTab('sales')">فاکتورها</button>
+<button data-tab="reports" onclick="showTab('reports')">گزارش‌ها</button>
+</div>
+<section id="tab-dashboard">
+<div id="lowNotice" class="notice hidden"></div>
+<div class="grid">
+<div class="panel"><h2>فروش ۷ روز اخیر</h2><div id="salesChart" class="chart"></div></div>
+<div class="panel"><h2>آخرین فروش‌ها</h2><div id="recentSales"></div></div>
+</div>
+<div class="panel" style="margin-top:14px"><h2>کالاهای کم‌موجود</h2><div id="lowProducts"></div></div>
+</section>
+<section id="tab-products" class="hidden">
+<div class="panel">
+<h2 id="productFormTitle">افزودن کالای جدید</h2>
+<form id="productForm" onsubmit="saveProduct(event)">
+<input type="hidden" id="editProductId">
+<div class="row">
+<div class="field"><label>نام کالا *</label><input id="pName" required placeholder="مثلاً ماسک مو"></div>
+<div class="field"><label>دسته‌بندی</label><input id="pCategory" placeholder="مو، آرایشی، مراقبت پوست..."></div>
+<div class="field"><label>بارکد / کد کالا</label><input id="pCode" placeholder="اختیاری"></div>
+</div>
+<div class="row">
+<div class="field"><label>قیمت خرید (تومان) *</label><input id="pBuy" type="number" min="0" required></div>
+<div class="field"><label>قیمت فروش (تومان) *</label><input id="pSell" type="number" min="0" required></div>
+<div class="field"><label>موجودی فعلی *</label><input id="pQty" type="number" min="0" step="1" required></div>
+<div class="field"><label>حد هشدار موجودی</label><input id="pMin" type="number" min="0" value="3"></div>
+</div><div class="row"><button type="submit">ذخیره کالا</button><button type="button" class="ghost" onclick="resetProductForm()">لغو / فرم جدید</button></div>
+</form></div>
+<div class="panel" style="margin-top:14px"><div class="row" style="justify-content:space-between"><h2>فهرست کالاها</h2><div class="field search"><label>جست‌وجو</label><input id="productSearch" placeholder="نام، دسته یا کد..." oninput="renderProducts()"></div></div><div id="productsTable" class="tablewrap"></div></div>
+</section>
+<section id="tab-sale" class="hidden">
+<div class="grid">
+<div class="panel"><h2>ثبت فروش جدید</h2>
+<div class="row"><div class="field"><label>نام مشتری (اختیاری)</label><input id="customer" placeholder="مشتری حضوری"></div><div class="field"><label>تخفیف فاکتور (تومان)</label><input id="discount" type="number" min="0" value="0"></div></div>
+<h2 style="margin-top:8px">اقلام فاکتور</h2><div id="cartItems"></div><button class="secondary" onclick="addCartLine()">＋ افزودن کالا به فاکتور</button>
+<div class="total"><span>جمع فاکتور</span><span id="cartTotal">۰ تومان</span></div>
+<button onclick="completeSale()" style="width:100%">ثبت نهایی فروش و کسر از موجودی</button>
+<p class="muted" style="font-size:11px;line-height:1.8">با ثبت نهایی، موجودی کالاها کم می‌شود و فاکتور در بخش فاکتورها ذخیره خواهد شد.</p>
+</div>
+<div class="panel"><h2>راهنمای فروش سریع</h2><p>۱. کالا را از فهرست انتخاب کنید.</p><p>۲. تعداد را وارد کنید.</p><p>۳. در صورت نیاز تخفیف ثبت کنید.</p><p>۴. ثبت نهایی را بزنید.</p><div class="notice">برای محاسبه دقیق سود، قیمت خرید هر کالا را هنگام ثبت کالا درست وارد کنید.</div></div>
+</div>
+</section>
+<section id="tab-sales" class="hidden"><div class="panel"><div class="row" style="justify-content:space-between"><h2>فاکتورها و فروش‌ها</h2><button class="secondary" onclick="exportSalesCSV()">خروجی اکسل‌پسند CSV</button></div><div id="salesTable" class="tablewrap"></div></div><div id="invoicePrint" class="panel hidden"></div></section>
+<section id="tab-reports" class="hidden">
+<div class="stats">
+<div class="stat"><small>کل فروش ثبت‌شده</small><strong id="allSales">۰</strong></div><div class="stat"><small>سود ناخالص کل</small><strong id="allProfit">۰</strong></div><div class="stat"><small>تعداد فاکتورها</small><strong id="allInvoices">۰</strong></div><div class="stat"><small>تعداد واحد فروخته‌شده</small><strong id="allUnits">۰</strong></div>
+</div>
+<div class="panel"><h2>گزارش فروش به تفکیک کالا</h2><div id="productReport" class="tablewrap"></div></div>
+</section>
+<div class="footer">اطلاعات در همین مرورگر ذخیره می‌شود. برای حفظ اطلاعات، مرتباً از «خروجی پشتیبان» استفاده کنید.</div>
+</div>
+<script>
+const KEY='beauty_store_manager_v1';
+let db=loadDB(), cart=[];
+function loadDB(){try{return JSON.parse(localStorage.getItem(KEY))||{products:[],sales:[]}}catch(e){return {products:[],sales:[]}}}
+function saveDB(){localStorage.setItem(KEY,JSON.stringify(db));renderAll()}
+function id(){return Date.now().toString(36)+Math.random().toString(36).slice(2,7)}
+function money(n){return (Number(n)||0).toLocaleString('fa-IR')+' تومان'}
+function num(n){return Number(n)||0}
+function dateKey(d=new Date()){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+function faDate(s){try{return new Date(s).toLocaleString('fa-IR',{dateStyle:'short',timeStyle:'short'})}catch(e){return s}}
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function showTab(t){document.querySelectorAll('[id^="tab-"]').forEach(e=>e.classList.add('hidden'));document.getElementById('tab-'+t).classList.remove('hidden');document.querySelectorAll('[data-tab]').forEach(b=>b.classList.toggle('active',b.dataset.tab===t));if(t==='sale'&&!cart.length)addCartLine();renderAll()}
+function saveProduct(e){e.preventDefault();let pid=document.getElementById('editProductId').value;let p={id:pid||id(),name:document.getElementById('pName').value.trim(),category:document.getElementById('pCategory').value.trim(),code:document.getElementById('pCode').value.trim(),buy:num(document.getElementById('pBuy').value),sell:num(document.getElementById('pSell').value),qty:Math.floor(num(document.getElementById('pQty').value)),min:Math.floor(num(document.getElementById('pMin').value))};if(!p.name)return;let i=db.products.findIndex(x=>x.id===pid);if(i>=0)db.products[i]=p;else db.products.push(p);resetProductForm();saveDB()}
+function resetProductForm(){document.getElementById('productForm').reset();document.getElementById('editProductId').value='';document.getElementById('pMin').value=3;document.getElementById('productFormTitle').textContent='افزودن کالای جدید'}
+function editProduct(pid){let p=db.products.find(x=>x.id===pid);if(!p)return;document.getElementById('editProductId').value=p.id;for(let [k,el] of [['name','pName'],['category','pCategory'],['code','pCode'],['buy','pBuy'],['sell','pSell'],['qty','pQty'],['min','pMin']])document.getElementById(el).value=p[k]??'';document.getElementById('productFormTitle').textContent='ویرایش کالا: '+p.name;window.scrollTo({top:0,behavior:'smooth'})}
+function deleteProduct(pid){let p=db.products.find(x=>x.id===pid);if(p&&confirm('کالای «'+p.name+'» حذف شود؟')){db.products=db.products.filter(x=>x.id!==pid);saveDB()}}
+function renderProducts(){let q=(document.getElementById('productSearch')?.value||'').toLowerCase();let arr=db.products.filter(p=>(p.name+' '+p.category+' '+p.code).toLowerCase().includes(q));let el=document.getElementById('productsTable');if(!arr.length){el.innerHTML='<div class="empty">هنوز کالایی ثبت نشده است. از فرم بالا کالا اضافه کنید.</div>';return}el.innerHTML='<table><thead><tr><th>نام کالا</th><th>دسته</th><th>خرید</th><th>فروش</th><th>موجودی</th><th>سود هر واحد</th><th>عملیات</th></tr></thead><tbody>'+arr.map(p=>`<tr><td><b>${esc(p.name)}</b><br><small class="muted">${esc(p.code)}</small></td><td>${esc(p.category||'—')}</td><td>${money(p.buy)}</td><td>${money(p.sell)}</td><td><span class="badge ${p.qty<=p.min?'low':''}">${p.qty.toLocaleString('fa-IR')}</span></td><td>${money(p.sell-p.buy)}</td><td><div class="actions"><button class="secondary" onclick="editProduct('${p.id}')">ویرایش</button><button class="danger" onclick="deleteProduct('${p.id}')">حذف</button></div></td></tr>`).join('')+'</tbody></table>'}
+function addCartLine(){cart.push({pid:db.products[0]?.id||'',qty:1});renderCart()}
+function renderCart(){let el=document.getElementById('cartItems');if(!cart.length){el.innerHTML='<div class="empty">برای شروع، کالا اضافه کنید.</div>';document.getElementById('cartTotal').textContent=money(0);return}el.innerHTML=cart.map((c,i)=>`<div class="cartline"><select onchange="cart[${i}].pid=this.value;renderCart()"><option value="">انتخاب کالا</option>${db.products.map(p=>`<option value="${p.id}" ${c.pid===p.id?'selected':''}>${esc(p.name)} — موجودی ${p.qty}</option>`).join('')}</select><input type="number" min="1" step="1" value="${c.qty}" aria-label="تعداد" onchange="cart[${i}].qty=Math.max(1,Math.floor(num(this.value)));renderCart()"><div style="font-size:12px">${money((db.products.find(p=>p.id===c.pid)?.sell||0)*c.qty)}</div><button class="danger" onclick="cart.splice(${i},1);renderCart()">×</button></div>`).join('');document.getElementById('cartTotal').textContent=money(cart.reduce((s,c)=>s+(db.products.find(p=>p.id===c.pid)?.sell||0)*c.qty,0))}
+function completeSale(){let items=cart.filter(c=>c.pid&&num(c.qty)>0);if(!items.length){alert('حداقل یک کالا انتخاب کنید.');return}let merged={};items.forEach(c=>merged[c.pid]=(merged[c.pid]||0)+Math.floor(num(c.qty)));for(let [pid,q] of Object.entries(merged)){let p=db.products.find(x=>x.id===pid);if(!p){alert('یک کالا دیگر موجود نیست.');return}if(q>p.qty){alert('موجودی «'+p.name+'» کافی نیست. موجودی: '+p.qty);return}}
+let lines=Object.entries(merged).map(([pid,qty])=>{let p=db.products.find(x=>x.id===pid);return {pid,name:p.name,qty,price:p.sell,buy:p.buy,total:p.sell*qty,profit:(p.sell-p.buy)*qty}});let subtotal=lines.reduce((s,l)=>s+l.total,0),discount=Math.max(0,num(document.getElementById('discount').value));if(discount>subtotal){alert('تخفیف نمی‌تواند بیشتر از مبلغ فاکتور باشد.');return}let sale={id:id(),number:'F-'+String(db.sales.length+1).padStart(4,'0'),date:new Date().toISOString(),day:dateKey(),customer:document.getElementById('customer').value.trim(),items:lines,subtotal,discount,total:subtotal-discount,profit:lines.reduce((s,l)=>s+l.profit,0)-discount};lines.forEach(l=>db.products.find(p=>p.id===l.pid).qty-=l.qty);db.sales.unshift(sale);saveDB();cart=[];document.getElementById('customer').value='';document.getElementById('discount').value=0;renderCart();showTab('sales');printInvoice(sale.id)}
+function printInvoice(sid){let s=db.sales.find(x=>x.id===sid);if(!s)return;let el=document.getElementById('invoicePrint');el.classList.remove('hidden');el.innerHTML=`<h2>فاکتور فروشگاه آرایشی</h2><p>شماره: ${s.number} | تاریخ: ${faDate(s.date)}</p><p>مشتری: ${esc(s.customer||'مشتری حضوری')}</p><table><thead><tr><th>کالا</th><th>تعداد</th><th>قیمت واحد</th><th>جمع</th></tr></thead><tbody>${s.items.map(l=>`<tr><td>${esc(l.name)}</td><td>${l.qty}</td><td>${money(l.price)}</td><td>${money(l.total)}</td></tr>`).join('')}</tbody></table><p>جمع اولیه: ${money(s.subtotal)}</p><p>تخفیف: ${money(s.discount)}</p><h3>مبلغ قابل پرداخت: ${money(s.total)}</h3><p>از خرید شما سپاسگزاریم 🌸</p><button class="no-print" onclick="window.print()">چاپ فاکتور</button>`;el.scrollIntoView({behavior:'smooth'})}
+function renderSales(){let el=document.getElementById('salesTable');if(!db.sales.length){el.innerHTML='<div class="empty">هنوز فروشی ثبت نشده است.</div>';return}el.innerHTML='<table><thead><tr><th>شماره</th><th>تاریخ</th><th>مشتری</th><th>تعداد اقلام</th><th>مبلغ</th><th>سود ناخالص</th><th>فاکتور</th></tr></thead><tbody>'+db.sales.map(s=>`<tr><td>${s.number}</td><td>${faDate(s.date)}</td><td>${esc(s.customer||'حضوری')}</td><td>${s.items.reduce((a,l)=>a+l.qty,0)}</td><td>${money(s.total)}</td><td>${money(s.profit)}</td><td><button class="secondary" onclick="printInvoice('${s.id}')">مشاهده / چاپ</button></td></tr>`).join('')+'</tbody></table>'}
+function renderDashboard(){let today=dateKey(),ts=db.sales.filter(s=>(s.day||dateKey(new Date(s.date)))===today),sales=ts.reduce((a,s)=>a+s.total,0),profit=ts.reduce((a,s)=>a+s.profit,0),low=db.products.filter(p=>p.qty<=p.min);document.getElementById('todaySales').textContent=money(sales);document.getElementById('todayProfit').textContent=money(profit);document.getElementById('todayCount').textContent=ts.length.toLocaleString('fa-IR')+' فاکتور';document.getElementById('stockValue').textContent=money(db.products.reduce((a,p)=>a+p.buy*p.qty,0));document.getElementById('productCount').textContent=db.products.length.toLocaleString('fa-IR');document.getElementById('lowCount').textContent=low.length.toLocaleString('fa-IR')+' کالا با موجودی کم';let notice=document.getElementById('lowNotice');notice.classList.toggle('hidden',!low.length);notice.textContent=low.length?'⚠️ موجودی '+low.length+' کالا به حد هشدار رسیده یا کمتر است.':'';document.getElementById('lowProducts').innerHTML=low.length?'<div class="tablewrap"><table><thead><tr><th>کالا</th><th>موجودی فعلی</th><th>حد هشدار</th></tr></thead><tbody>'+low.map(p=>`<tr><td>${esc(p.name)}</td><td>${p.qty}</td><td>${p.min}</td></tr>`).join('')+'</tbody></table></div>':'<div class="empty">فعلاً کالای کم‌موجودی ندارید.</div>';document.getElementById('recentSales').innerHTML=db.sales.slice(0,5).map(s=>`<p style="display:flex;justify-content:space-between;gap:8px;border-bottom:1px solid var(--line);padding-bottom:9px"><span>${s.number}<br><small class="muted">${faDate(s.date)}</small></span><b>${money(s.total)}</b></p>`).join('')||'<div class="empty">هنوز فروشی ثبت نشده است.</div>';let days=[];for(let i=6;i>=0;i--){let d=new Date();d.setDate(d.getDate()-i);let key=dateKey(d),v=db.sales.filter(s=>(s.day||dateKey(new Date(s.date)))===key).reduce((a,s)=>a+s.total,0);days.push({key,label:d.toLocaleDateString('fa-IR',{day:'numeric',month:'numeric'}),v})}let max=Math.max(1,...days.map(d=>d.v));document.getElementById('salesChart').innerHTML=days.map(d=>`<div class="barcol"><em>${d.v?shortMoney(d.v):'—'}</em><div class="bar" style="height:${Math.max(3,d.v/max*78)}%"></div><small>${d.label}</small></div>`).join('')}
+function shortMoney(n){return n>=1e6?(n/1e6).toFixed(1)+'م':n>=1e3?(n/1e3).toFixed(0)+'هزار':String(n)}
+function renderReports(){let sales=db.sales,all=sales.reduce((a,s)=>a+s.total,0),profit=sales.reduce((a,s)=>a+s.profit,0),units=sales.reduce((a,s)=>a+s.items.reduce((x,l)=>x+l.qty,0),0);document.getElementById('allSales').textContent=money(all);document.getElementById('allProfit').textContent=money(profit);document.getElementById('allInvoices').textContent=sales.length.toLocaleString('fa-IR');document.getElementById('allUnits').textContent=units.toLocaleString('fa-IR');let map={};sales.forEach(s=>s.items.forEach(l=>{let k=l.pid||l.name;map[k]??={name:l.name,qty:0,total:0,profit:0};map[k].qty+=l.qty;map[k].total+=l.total;map[k].profit+=l.profit}));let arr=Object.values(map);document.getElementById('productReport').innerHTML=arr.length?'<table><thead><tr><th>کالا</th><th>تعداد فروخته‌شده</th><th>فروش ناخالص</th><th>سود ناخالص</th></tr></thead><tbody>'+arr.map(x=>`<tr><td>${esc(x.name)}</td><td>${x.qty}</td><td>${money(x.total)}</td><td>${money(x.profit)}</td></tr>`).join('')+'</tbody></table>':'<div class="empty">برای گزارش‌گیری ابتدا فروش ثبت کنید.</div>'}
+function renderAll(){renderProducts();renderSales();renderDashboard();renderReports();renderCart()}
+function exportData(){let blob=new Blob([JSON.stringify(db,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='backup-foroshgah-arayeshi-'+dateKey()+'.json';a.click();URL.revokeObjectURL(a.href)}
+function importData(e){let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{try{let x=JSON.parse(r.result);if(!Array.isArray(x.products)||!Array.isArray(x.sales))throw 0;if(confirm('اطلاعات فعلی با اطلاعات فایل جایگزین شود؟')){db=x;saveDB();alert('بازیابی با موفقیت انجام شد.')}}catch(err){alert('فایل پشتیبان معتبر نیست.')}e.target.value=''};r.readAsText(f)}
+function exportSalesCSV(){let rows=[['شماره فاکتور','تاریخ','مشتری','مبلغ تومان','سود ناخالص تومان','اقلام']];db.sales.forEach(s=>rows.push([s.number,faDate(s.date),s.customer,s.total,s.profit,s.items.map(i=>i.name+' × '+i.qty).join(' | ')]));let csv='\ufeff'+rows.map(r=>r.map(v=>'"'+String(v??'').replace(/"/g,'""')+'"').join(',')).join('\r\n');let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));a.download='gozaresh-forosh-'+dateKey()+'.csv';a.click();URL.revokeObjectURL(a.href)}
+renderAll();
+</script>
+</body></html>
